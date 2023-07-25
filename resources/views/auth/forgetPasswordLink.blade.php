@@ -4,6 +4,11 @@
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
           <div class="col-md-8">
               <div class="card">
                   <div class="card-header">Reset Password</div>

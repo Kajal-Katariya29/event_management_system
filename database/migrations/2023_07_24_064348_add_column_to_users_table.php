@@ -17,8 +17,8 @@ class AddColumnToUsersTable extends Migration
             $table->renameColumn('id', 'user_id');
             $table->unsignedBigInteger('role_id')->after('id');
             $table->renameColumn('name','first_name');
-            $table->string('last_name',100)->after('name');
-            $table->string('phone_number',50)->after('last_name');
+            $table->string('last_name',32)->after('name');
+            $table->string('phone_number',32)->after('last_name');
             $table->softDeletes();
 
             $table->foreign('role_id')->references('role_id')->on('roles')->onDelete('cascade');

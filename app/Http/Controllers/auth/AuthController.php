@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AuthRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -21,45 +24,27 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function postLogin(Request $request)
+    public function postLogin(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard')
-                        ->withSuccess('You have Successfully loggedin');
+            $roleId = Auth::user()->role_id;
+            if($roleId == 1){
+                return redirect()->route('homePage.index')->withSuccess('You have Successfully loggedin');
+            }
+            else{
+                return redirect()->route('user.index')->withSuccess('You have Successfully loggedin');
+            }
         }
-
         return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
     }
 
-    public function postRegistration(Request $request)
+    public function postRegistration(RegisterRequest $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'phone_number' => 'required|numeric'
-        ]);
-
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
-    }
-
-    public function dashboard()
-    {
-        if(Auth::check()){
-            return view('auth.dashboard');
-        }
-
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect("login")->withSuccess('Great! You have successfully registred yourself!!');
     }
 
     public function create(array $data)

@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\admin\role\RoleController;
+use App\Http\Controllers\admin\user\UserController;
 use App\Http\Controllers\auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\ForgotPasswordController;
+use App\Http\Controllers\front\homePage\HomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,7 @@ Route::get('/login', function () {
     return view('welcome');
 });
 
+//Routes for authentication system
 Route::get('/login',[AuthController::class,'index'])->name('login');
 Route::post('/post-login',[AuthController::class,'postLogin'])->name('login.post');
 Route::get('/registration',[AuthController::class,'registration'])->name('register');
@@ -31,3 +35,19 @@ Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showRes
 Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
+//Routes for admin side
+
+Route::group(['middleware' => ['admin']],function(){
+    Route::prefix('admin')->group(function () {
+        Route::resource('/user',UserController::class);
+        Route::resource('/role',RoleController::class);
+    });
+});
+//Route for user
+
+//Route for user side
+
+//Route for HomePage
+Route::group(['middleware' => ['user']], function(){
+    Route::get('/home-page',[HomePageController::class,'index'])->name('homePage.index');
+});

@@ -10,7 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\Auth\ForgetPasswordRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,12 +20,8 @@ class ForgotPasswordController extends Controller
          return view('auth.forgetPassword');
     }
 
-    public function submitForgetPasswordForm(Request $request)
+    public function submitForgetPasswordForm(ForgetPasswordRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-        ]);
-
         $token = Str::random(64);
 
         DB::table('password_resets')->insert([
@@ -45,14 +42,8 @@ class ForgotPasswordController extends Controller
         return view('auth.forgetPasswordLink', ['token' => $token]);
     }
 
-    public function submitResetPasswordForm(Request $request)
+    public function submitResetPasswordForm(ResetPasswordRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required'
-        ]);
-
         $updatePassword = DB::table('password_resets')
                             ->where([
                             'email' => $request->email,

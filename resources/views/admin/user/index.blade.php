@@ -5,13 +5,6 @@
 @endsection
 
 @section('body')
-@extends('admin.app')
-
-@section('title')
-    Role Listing
-@endsection
-
-@section('body')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Users</h1>
             <div class="row ">

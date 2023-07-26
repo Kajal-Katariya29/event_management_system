@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventThemesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEventThemesTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_themes', function (Blueprint $table) {
-            $table->bigIncrements('event_theme_id');
-            $table->string('name');
+        Schema::create('countries', function (Blueprint $table) {
+            $table->bigIncrements('country_id');
+            $table->string('name',255);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +28,6 @@ class CreateEventThemesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_themes');
+        Schema::dropIfExists('countries');
     }
 }

@@ -67,11 +67,27 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('banner.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-comment"></i>
                         <span class="px-1">
-                            Comment
+                            Banner
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('banner.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-comment"></i>
+                        <span class="px-1">
+                            Country
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('banner.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-comment"></i>
+                        <span class="px-1">
+                            City
                         </span>
                     </div>
                 </a>

@@ -10,9 +10,9 @@
                     {{ session('success') }}
                 </div>
             @endif
-            @if (session('error'))
-                <div class="alert alert-error" role="alert">
-                    {{ session('error') }}
+            @if (Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('error') }}
                 </div>
             @endif
               <div class="card">

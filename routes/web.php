@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\banner\BannerController;
+use App\Http\Controllers\admin\city\CityController;
+use App\Http\Controllers\admin\country\CountryController;
 use App\Http\Controllers\admin\role\RoleController;
 use App\Http\Controllers\admin\user\UserController;
 use App\Http\Controllers\auth\AuthController;
@@ -39,11 +42,23 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPas
 
 Route::group(['middleware' => ['admin']],function(){
     Route::prefix('admin')->group(function () {
+
+        //Route for user
         Route::resource('/user',UserController::class);
+
+        //Route for role
         Route::resource('/role',RoleController::class);
+
+        //Route for banner
+        Route::resource('/banner',BannerController::class);
+
+        //Route for country
+        Route::resource('/countries',CountryController::class);
+
+        //Route for city
+        Route::resource('/cities',CityController::class);
     });
 });
-//Route for user
 
 //Route for user side
 

@@ -89,7 +89,7 @@ class RoleController extends Controller
     {
         $roleData = $this->roleRepository->updateRole($request->all(), $id);
 
-        if(empty($roleData)){
+        if($roleData){
             return redirect()->route('role.index')->with('success','Role Detail upadted successfully !!');
         }
         return redirect()->route('role.index')->with('error','The Data is not available !!');
@@ -106,7 +106,7 @@ class RoleController extends Controller
     {
         $roleData = $this->roleRepository->destroyRole($id);
 
-        if(empty($roleData)){
+        if($roleData){
             return redirect()->route('role.index')->with('success','Role Deleted successfully !!');
         }
         return redirect()->route('role.index')->with('error','The Data is not available !!');

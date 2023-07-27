@@ -19,15 +19,15 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('event-categories.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-bullseye"></i>
                         <span class="px-1">
-                            Event Theme
+                            Event Category
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('organizer.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-palette"></i>
                         <span class="px-1">
@@ -35,7 +35,15 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('sponser.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-palette"></i>
+                        <span class="px-1">
+                            Sponser
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('venue.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-tools"></i>
                         <span class="px-1">
@@ -75,7 +83,7 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="{{ route('banner.index') }}">
+                <a class="nav-link" href="{{ route('countries.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-comment"></i>
                         <span class="px-1">
@@ -83,7 +91,7 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="{{ route('banner.index') }}">
+                <a class="nav-link" href="{{ route('cities.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-comment"></i>
                         <span class="px-1">

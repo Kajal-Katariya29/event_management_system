@@ -3,8 +3,12 @@
 use App\Http\Controllers\admin\banner\BannerController;
 use App\Http\Controllers\admin\city\CityController;
 use App\Http\Controllers\admin\country\CountryController;
+use App\Http\Controllers\admin\event\eventCategory\EventCategoryController;
+use App\Http\Controllers\admin\organizer\OrganizerController;
 use App\Http\Controllers\admin\role\RoleController;
+use App\Http\Controllers\admin\sponser\SponserController;
 use App\Http\Controllers\admin\user\UserController;
+use App\Http\Controllers\admin\venue\VenueController;
 use App\Http\Controllers\auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\ForgotPasswordController;
@@ -57,6 +61,18 @@ Route::group(['middleware' => ['admin']],function(){
 
         //Route for city
         Route::resource('/cities',CityController::class);
+
+        //Route for Event Category
+        Route::resource('/event-categories',EventCategoryController::class);
+
+        //Routes for Organizer
+        Route::resource('/organizer',OrganizerController::class);
+
+        //Routes for Sponser
+        Route::resource('/sponser',SponserController::class);
+
+        //Routes for Venue
+        Route::resource('/venue',VenueController::class);
     });
 });
 

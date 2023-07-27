@@ -13,7 +13,7 @@ class CityRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class CityRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'country_id' => 'required',
+            'name' => 'required|string|max:255'
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'country_id.required' => 'Please Select this feild  !!',
         ];
     }
 }

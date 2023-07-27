@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\admin\city;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Repositories\Interfaces\CityRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\CityRequest;
 
 class CityController extends Controller
 {
@@ -12,9 +15,20 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $cityRepository;
+
+    public function __construct(CityRepositoryInterface $cityRepository)
+    {
+        $this->cityRepository = $cityRepository;
+    }
+
     public function index()
     {
-        //
+        $cities = $this->cityRepository->allCity();
+        // dd($cities);
+
+        return view('admin.city.index',compact('cities'));
     }
 
     /**
@@ -24,7 +38,8 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        $country_id = Country::select('country_id','name')->pluck('name','country_id');
+        return view('admin.city.create',compact('country_id'));
     }
 
     /**
@@ -33,9 +48,14 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CityRequest $request)
     {
-        //
+        $storeCity = $this->cityRepository->storeCity($request->all());
+
+        if($storeCity){
+            return redirect()->route('cities.index')->with('success','Country Record created successfully!!');
+        }
+        return redirect()->route('cities.index')->with('error','Please select Country !!');
     }
 
     /**
@@ -57,7 +77,10 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $country_id = Country::select('country_id','name')->pluck('name','country_id');
+        $cityData = $this->cityRepository->findCity($id);
+
+        return view('admin.city.edit',compact('cityData','country_id'));
     }
 
     /**
@@ -67,9 +90,14 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CityRequest $request, $id)
     {
-        //
+        $cityData = $this->cityRepository->updateCity($request->all(), $id);
+
+        if($cityData){
+            return redirect()->route('cities.index')->with('success','City Detail upadted successfully !!');
+        }
+        return redirect()->route('cities.index')->with('error','The Data is not available !!');
     }
 
     /**
@@ -80,6 +108,11 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cityData = $this->cityRepository->destroyCity($id);
+
+        if($cityData){
+            return redirect()->route('cities.index')->with('success','City Deleted successfully !!');
+        }
+        return redirect()->route('cities.index')->with('error','The Data is not available !!');
     }
 }

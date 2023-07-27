@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin\country;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\CountryRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\CountryRequest;
 
 class CountryController extends Controller
 {
@@ -12,9 +14,18 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $countryRepository;
+
+    public function __construct(CountryRepositoryInterface $countryRepository)
+    {
+        $this->countryRepository = $countryRepository;
+    }
     public function index()
     {
-        //
+        $countries = $this->countryRepository->allCountry();
+
+        return view('admin.country.index',compact('countries'));
     }
 
     /**
@@ -24,7 +35,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.country.create');
     }
 
     /**
@@ -33,9 +44,12 @@ class CountryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
-        //
+        $this->countryRepository->storeCountry($request->all());
+
+        return redirect()->route('countries.index')->with('success','Country Record created successfully !!');
+
     }
 
     /**
@@ -57,7 +71,9 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $countryData = $this->countryRepository->findCountry($id);
+
+        return view('admin.country.edit',compact('countryData'));
     }
 
     /**
@@ -67,9 +83,14 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CountryRequest $request, $id)
     {
-        //
+        $countryData = $this->countryRepository->updateCountry($request->all(), $id);
+
+        if($countryData){
+            return redirect()->route('countries.index')->with('success','Country Detail upadted successfully !!');
+        }
+        return redirect()->route('countries.index')->with('error','The Data is not available !!');
     }
 
     /**
@@ -80,6 +101,11 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $countryData = $this->countryRepository->destroyCountry($id);
+
+        if($countryData){
+            return redirect()->route('countries.index')->with('success','Country Deleted successfully !!');
+        }
+        return redirect()->route('countries.index')->with('error','The Data is not available !!');
     }
 }

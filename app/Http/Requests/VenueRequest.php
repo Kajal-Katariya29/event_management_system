@@ -13,7 +13,7 @@ class VenueRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class VenueRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'country_id' => 'required',
+            'city_id' => 'required',
+            'venue_name' => 'required',
+            'address' => 'required',
+            'pin_code' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'country_id.required' => 'Please Select this feild !!',
+            'city_id.required' => 'Please Select this feild !!'
         ];
     }
 }

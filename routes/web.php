@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\banner\BannerController;
 use App\Http\Controllers\admin\city\CityController;
 use App\Http\Controllers\admin\country\CountryController;
 use App\Http\Controllers\admin\event\eventCategory\EventCategoryController;
+use App\Http\Controllers\admin\event\EventController;
 use App\Http\Controllers\admin\organizer\OrganizerController;
 use App\Http\Controllers\admin\role\RoleController;
 use App\Http\Controllers\admin\sponser\SponserController;
@@ -73,6 +74,10 @@ Route::group(['middleware' => ['admin']],function(){
 
         //Routes for Venue
         Route::resource('/venue',VenueController::class);
+        Route::post('/fetch-cities',[VenueController::class,'fetchCities']);
+
+        //Route for Event
+        Route::resource('/event',EventController::class);
     });
 });
 

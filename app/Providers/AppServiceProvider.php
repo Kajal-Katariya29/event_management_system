@@ -6,10 +6,12 @@ use App\Repositories\BannerRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\EventCategoryRepository;
+use App\Repositories\EventRepository;
 use App\Repositories\Interfaces\BannerRepositoryInterface;
 use App\Repositories\Interfaces\CityRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\EventCategoryRepositoryInterface;
+use App\Repositories\Interfaces\EventRepositoryInterface;
 use App\Repositories\Interfaces\OrganizerrepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrganizerrepositoryInterface::class,OrganizerRepository::class);
         $this->app->bind(SponserRepositoryInterface::class,SponserRepository::class);
         $this->app->bind(VenueRepositoryInterfce::class,VenueRepository::class);
+        $this->app->bind(EventRepositoryInterface::class,EventRepository::class);
     }
 
     /**

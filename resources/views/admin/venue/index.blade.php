@@ -53,14 +53,16 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ( $roles as $role)
+                    @foreach ( $venues as $venue)
                     <tr>
-                        <td>{{ $role->name }}</td>
+                        <td>{{ $venue->venue_name }}</td>
+                        <td>{{ $venue->address }}</td>
+                        <td>{{ $venue->pin_code }}</td>
                         <td>
                             <div class="d-flex flex-row mb-3">
-                                <a class="btn btn-outline-warning edit-delete-button me-2" href="{{ route('role.edit',$role->role_id) }}" id="edit{{ $role->role_id }}">Edit</a>
-                                {!! Form::open(['route' => ['role.destroy',$role->role_id], 'method' => 'DELETE']) !!}
-                                    {!! Form::submit('Delete',['class'=> 'btn btn-outline-warning edit-delete-button', 'dusk' => "delete_{$role->role_id}" ]) !!}
+                                <a class="btn btn-outline-warning edit-delete-button me-2" href="{{ route('venue.edit',$venue->venue_id) }}" id="edit{{ $venue->venue_id }}">Edit</a>
+                                {!! Form::open(['route' => ['venue.destroy',$venue->venue_id], 'method' => 'DELETE']) !!}
+                                    {!! Form::submit('Delete',['class'=> 'btn btn-outline-warning edit-delete-button', 'dusk' => "delete_{$venue->venue_id}" ]) !!}
                                 {!! Form::close() !!}
                             </div>
                         </td>

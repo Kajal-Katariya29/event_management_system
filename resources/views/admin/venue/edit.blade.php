@@ -29,4 +29,38 @@
 
 @section('scripts')
 
+<script>
+
+    //for fetch city from selected country
+    $(document).ready(function(){
+        $("#selectCountry").on("change", function() {
+            var countryId = this.value;
+            var homeUrl = document.location.origin;
+            $("#city").html("");
+            $.ajax({
+                url: homeUrl + "/admin/fetch-cities",
+                type: "POST",
+                data: {
+                    country_id: countryId,
+                },
+                success: function(result) {
+                    $("#city").html('<option value="">Select City</option>');
+                    $.each(result.cities, function(key, value) {
+                        $("#city").append(
+                            '<option value="' +
+                            value.city_id +
+                            '">' +
+                            value.name +
+                            "</option>"
+                        );
+                    });
+                },
+                error: function(msg) {
+                    console.log(msg);
+                },
+            });
+        });
+    });
+</script>
+
 @endsection

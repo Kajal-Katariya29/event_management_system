@@ -11,7 +11,7 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('event.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fa fa-calendar"></i>
                         <span class="px-1">

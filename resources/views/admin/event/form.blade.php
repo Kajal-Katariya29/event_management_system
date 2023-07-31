@@ -41,7 +41,7 @@
     </div>
     <div class="col-6 mt-3">
         {!! Form::label("sponser_id", "Event Sponsers : ") !!}
-        {!! Form::select('sponser_id[]',$sponser_id , null, ['multiple' => true ,'placeholder' => 'Select Event Sponsers...', 'class' => 'form-select mt-2']) !!}
+        {!! Form::select('sponser_id[]',$sponser_id , $selectedSponser , ['multiple' => true ,'placeholder' => 'Select Event Sponsers...', 'class' => 'form-select mt-2']) !!}
         {!! $errors->first("sponser_id",'<span class="text-danger">:message</span>') !!}
     </div>
     <div class="col-6 mt-2">
@@ -51,7 +51,7 @@
     </div>
     <div class="col-6 mt-3">
         {!! Form::label('images', 'Event Images:') !!}
-        {!! Form::file('images[]', ['class' => 'form-control', 'id' => 'images', 'multiple' => true]) !!}
+        {!! Form::file('images[]', ['class' => 'form-control deleteImage', 'id' => 'deleteImage', 'multiple' => true]) !!}
         {!! $errors->first("images",'<span class="text-danger">:message</span>') !!}
         @if (!empty($eventData && $eventData->eventMedia))
             @foreach ($eventData->eventMedia as $media)

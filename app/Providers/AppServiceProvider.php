@@ -13,13 +13,19 @@ use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\EventCategoryRepositoryInterface;
 use App\Repositories\Interfaces\EventRepositoryInterface;
 use App\Repositories\Interfaces\OrganizerrepositoryInterface;
+use App\Repositories\Interfaces\PermissionRepositoryInterface;
+use App\Repositories\Interfaces\RolePermissionRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
+use App\Repositories\Interfaces\RoleUserRepositoryInterface;
 use App\Repositories\Interfaces\SponserRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\Interfaces\VenueRepositoryInterfce;
 use App\Repositories\OrganizerRepository;
+use App\Repositories\PermissionRepository;
+use App\Repositories\RolePermissionRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\RoleUserRepository;
 use App\Repositories\SponserRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\VenueRepository;
@@ -43,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SponserRepositoryInterface::class,SponserRepository::class);
         $this->app->bind(VenueRepositoryInterfce::class,VenueRepository::class);
         $this->app->bind(EventRepositoryInterface::class,EventRepository::class);
+        $this->app->bind(PermissionRepositoryInterface::class,PermissionRepository::class);
+        $this->app->bind(RolePermissionRepositoryInterface::class,RolePermissionRepository::class);
+        $this->app->bind(RoleUserRepositoryInterface::class,RoleUserRepository::class);
     }
 
     /**

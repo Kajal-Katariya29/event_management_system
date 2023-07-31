@@ -27,6 +27,16 @@ class Event extends Model
     {
         return $this->hasMany(EventMedia::class, 'event_id', 'event_id');
     }
+
+    /**
+     * Get all of the sponsers for the Event
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sponsers(): HasMany
+    {
+        return $this->hasMany(Sponsorship::class, 'event_id', 'event_id');
+    }
 }
 
 

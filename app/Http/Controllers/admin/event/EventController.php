@@ -11,6 +11,9 @@ use App\Models\Organizer;
 use App\Models\Sponser;
 use App\Models\Venue;
 use App\Http\Requests\EventRequest;
+use App\Models\EventMedia;
+use App\Models\Sponsorship;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -42,12 +45,12 @@ class EventController extends Controller
     public function create()
     {
         $eventData = [];
+        $selectedSponser = [];
         $event_category_id = EventCategory::select('event_category_id','name')->pluck('name','event_category_id');
         $venue_id = Venue::select('venue_id','venue_name')->pluck('venue_name','venue_id');
         $organizer_id = Organizer::select('organizer_id','name')->pluck('name','organizer_id');
         $sponser_id  = Sponser::select('sponser_id','sponser_name')->pluck('sponser_name','sponser_id');
-
-        return view('admin.event.create',compact('event_category_id','venue_id','organizer_id','sponser_id','eventData'));
+        return view('admin.event.create',compact('event_category_id','venue_id','organizer_id','sponser_id','eventData','selectedSponser'));
     }
 
     /**
@@ -82,14 +85,15 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('event.update');
         $event_category_id = EventCategory::select('event_category_id','name')->pluck('name','event_category_id');
         $venue_id = Venue::select('venue_id','venue_name')->pluck('venue_name','venue_id');
         $organizer_id = Organizer::select('organizer_id','name')->pluck('name','organizer_id');
         $sponser_id  = Sponser::select('sponser_id','sponser_name')->pluck('sponser_name','sponser_id');
 
         $eventData = $this->eventRepository->findEvent($id);
-
-        return view('admin.event.edit',compact('eventData','event_category_id','venue_id','organizer_id','sponser_id'));
+        $selectedSponser = Sponsorship::where('event_id',$id)->pluck('sponser_id');
+        return view('admin.event.edit',compact('eventData','event_category_id','venue_id','organizer_id','sponser_id','selectedSponser'));
     }
 
     /**
@@ -115,6 +119,11 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function deleteImage($id)
+    {
+        $this->eventRepository->deleteImage($id);
+    }
+
     public function destroy($id)
     {
         $eventData = $this->eventRepository->destroyEvent($id);

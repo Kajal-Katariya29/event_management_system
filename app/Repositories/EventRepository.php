@@ -62,7 +62,20 @@ class EventRepository implements EventRepositoryInterface
     public function updateEvent($data, $id)
     {
         $event = Event::where('event_id', $id)->first();
+
+        Sponsorship::where('event_id', $id)->delete();
+
+        if($data['sponser_id']){
+            foreach($data['sponser_id'] as $sponserId){
+                Sponsorship::create([
+                    'event_id' => $event->event_id,
+                    'sponser_id' => $sponserId
+                ]);
+            }
+        }
+
         $updatedEvent = null;
+
         if($event)
         {
             $updatedEvent = $event->update($data);
@@ -79,5 +92,21 @@ class EventRepository implements EventRepositoryInterface
             $deleteEvent = $event->delete();
         }
         return $deleteEvent;
+    }
+
+    public function deleteImage($id)
+    {
+        $eventMedia = EventMedia::where('event_media_id',$id)->first();
+
+        $upload_path =  "admin/images/eventmedia/" . $id . "/";
+
+        if (!empty($eventMedia->media_name) && file_exists($upload_path . $eventMedia->media_name)) {
+            unlink($upload_path . $eventMedia->media_name);
+        }
+
+        EventMedia::where('event_media_id',$id)->delete();
+
+        return response()->json(['status','success']);
+
     }
 }

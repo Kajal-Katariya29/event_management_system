@@ -67,14 +67,6 @@
                         </span>
                     </div>
                 </a>
-                <a class="nav-link" href="{{ route('role.index') }}">
-                    <div class="sb-nav-link-icon  text-light">
-                        <i class="fas fa-flag"></i>
-                        <span class="px-1">
-                            Role
-                        </span>
-                    </div>
-                </a>
                 <a class="nav-link" href="{{ route('banner.index') }}">
                     <div class="sb-nav-link-icon  text-light">
                         <i class="fas fa-comment"></i>
@@ -85,7 +77,7 @@
                 </a>
                 <a class="nav-link" href="{{ route('countries.index') }}">
                     <div class="sb-nav-link-icon  text-light">
-                        <i class="fas fa-comment"></i>
+                        <i class="fas fa-globe"></i>
                         <span class="px-1">
                             Country
                         </span>
@@ -93,9 +85,41 @@
                 </a>
                 <a class="nav-link" href="{{ route('cities.index') }}">
                     <div class="sb-nav-link-icon  text-light">
-                        <i class="fas fa-comment"></i>
+                        <i class="fas fa-city"></i>
                         <span class="px-1">
                             City
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('role.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-flag"></i>
+                        <span class="px-1">
+                            Role
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('permission.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-palette"></i>
+                        <span class="px-1">
+                            Permission
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('role-user.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-users"></i>
+                        <span class="px-1">
+                            Role-User
+                        </span>
+                    </div>
+                </a>
+                <a class="nav-link" href="{{ route('role-permission.index') }}">
+                    <div class="sb-nav-link-icon  text-light">
+                        <i class="fas fa-flag"></i>
+                        <span class="px-1">
+                            Role-Permission
                         </span>
                     </div>
                 </a>

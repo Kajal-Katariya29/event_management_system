@@ -6,7 +6,10 @@ use App\Http\Controllers\admin\country\CountryController;
 use App\Http\Controllers\admin\event\eventCategory\EventCategoryController;
 use App\Http\Controllers\admin\event\EventController;
 use App\Http\Controllers\admin\organizer\OrganizerController;
+use App\Http\Controllers\admin\permission\PermissionController;
+use App\Http\Controllers\admin\permission\RolePermissionController;
 use App\Http\Controllers\admin\role\RoleController;
+use App\Http\Controllers\admin\role\RoleUserController;
 use App\Http\Controllers\admin\sponser\SponserController;
 use App\Http\Controllers\admin\user\UserController;
 use App\Http\Controllers\admin\venue\VenueController;
@@ -78,6 +81,16 @@ Route::group(['middleware' => ['admin']],function(){
 
         //Route for Event
         Route::resource('/event',EventController::class);
+        Route::post('/delete-image/{id}',[EventController::class,'deleteImage'])->name('event.delete.image');
+
+        //Route for Permission
+        Route::resource('/permission',PermissionController::class);
+
+        //Route for Role-User
+        Route::resource('/role-user',RoleUserController::class);
+
+        //Route for Role-permission
+        Route::resource('/role-permission',RolePermissionController::class);
     });
 });
 

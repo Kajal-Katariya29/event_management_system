@@ -28,6 +28,8 @@
 @section('scripts')
 
 <script>
+
+    //for fetch city from selected country
     $(document).ready(function(){
         $("#selectCountry").on("change", function() {
             var countryId = this.value;

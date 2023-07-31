@@ -9,11 +9,13 @@
         <h1 class="mt-4">Event</h1>
         <div class="row ">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-12 py-3 ">
-                <div class="float-end mb-3 mt-3">
-                    <a class="btn px-3 btn-outline-warning fs-6 edit-delete-button" href="{{route('event.create')}}">
-                        <i class="fas fa-plus"></i> Add
-                    </a>
-                </div>
+                @can('event.create')
+                    <div class="float-end mb-3 mt-3">
+                        <a class="btn px-3 btn-outline-warning fs-6 edit-delete-button" href="{{route('event.create')}}">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                @endcan
             </div>
             @if (Session::has('success'))
                 <div class="alert alert-success" role="alert">

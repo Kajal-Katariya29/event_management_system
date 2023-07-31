@@ -19,7 +19,7 @@
 </div>
 @endif
 <div class="row m-5">
-    {!! Form::model($eventData, ['route' => ['event.update', $eventData->event_id ], 'method' => 'PATCH','enctype' => 'multipart/form-data']) !!}
+    {!! Form::model($eventData, ['route' => ['event.update', $eventData->event_id ], 'method' => 'PATCH', 'enctype' => 'multipart/form-data']) !!}
     {!! Form::token() !!}
         @include('admin.event.form')
     {!! Form::close() !!}
@@ -29,4 +29,26 @@
 
 @section('scripts')
 
+<script>
+    $('.deleteImage').on('click', function() {
+        var ImageId = $(this).data('image-id');
+        var routeUrl = "/admin/delete-image/" + ImageId;
+
+        $.ajax({
+            url: routeUrl,
+            type: "POST",
+            data: {
+                image_id: ImageId,
+                method: "DELETE",
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+    });
+</script>
 @endsection

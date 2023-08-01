@@ -23,6 +23,7 @@ class CreateVenuesTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *
